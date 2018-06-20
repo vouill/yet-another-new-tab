@@ -1,0 +1,42 @@
+@font-face {
+  font-family: 'Menlo';
+  src: url(./assets/Menlo-Regular.ttf);
+}
+$anchor-color: #7188B9;
+
+
+* {
+  font-family: Menlo;
+  color: white;
+  transition: 0.2s;
+}
+
+input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: dashed 2px white;
+}
+
+button {
+  background-color: transparent;
+  border-radius: 5px;
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(255,255,255,0.1);
+  }
+}
+
+a{
+  color: $anchor-color;
+  &:hover {
+    color: lighten($anchor-color, 10%);
+  }
+  &:active {
+    color: darken($anchor-color, 10%);
+  }
+}
+
+html {
+  background-color: #26292C;
+}
