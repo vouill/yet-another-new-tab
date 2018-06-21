@@ -9,6 +9,8 @@ $anchor-color: #7188B9;
   font-family: Menlo;
   color: white;
   transition: 0.2s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 input {
