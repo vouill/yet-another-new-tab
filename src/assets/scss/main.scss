@@ -2,22 +2,21 @@
   font-family: 'Menlo';
   src: url(./assets/Menlo-Regular.ttf);
 }
-$anchor-color: #7188B9;
+$anchor-color: #81a2be;
 
 
 * {
   font-family: Menlo;
-  color: white;
   transition: 0.2s;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: #c5c8c6;
+  letter-spacing: -0.5px;
 }
 
 input {
   background-color: transparent;
   border: none;
   outline: none;
-  border-bottom: dashed 2px white;
+  border-bottom: dashed 2px #c5c8c6;
 }
 
 button {
@@ -40,5 +39,5 @@ a{
 }
 
 html {
-  background-color: #26292C;
+  background-color: #1d1f21;
 }

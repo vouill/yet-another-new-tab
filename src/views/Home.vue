@@ -51,7 +51,6 @@ export default {
   align-items: center;
   a {
     margin-left: 0.5em;
-    color: white;
     text-decoration: none;
   }
 }
