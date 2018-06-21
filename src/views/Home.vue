@@ -1,14 +1,12 @@
 <template>
   <div class="home">
-    <div class="title">Websites:</div>
-    <draggable v-model="websites" @update="storeWebsiteState">
-      <div class="website" v-for="website in websites"><img height="14px" :src="`https://logo.clearbit.com/${website.url.replace(/(^\w+:|^)\/\//, '').split('/')[0]}`"><a :href="website.url">{{website.url}}</a></div>
-    </draggable>
-    <form @submit.prevent="addWebsite" class="website">
+    <div class="title "><span class="yellow">websites:</span><form @submit.prevent="addWebsite" class="website">
       <input type="url" v-model="urlInput" required placeholder="url">
-      <input v-model="labelInput"  type="text" required placeholder="label">
-      <button type="submit">submit</button>
-    </form>
+    </form></div>
+    <draggable v-model="websites" @update="storeWebsiteState">
+      <a :href="website.url" class="website" v-for="website in websites"><img height="14px" width="14px" :src="`https://logo.clearbit.com/${website.url.replace(/(^\w+:|^)\/\//, '').split('/')[0]}`">{{website.url}}</a>
+    </draggable>
+
   </div>
 </template>
 
@@ -16,13 +14,13 @@
 // @ is an alias to /src
 import draggable from "vuedraggable";
 import HelloWorld from "@/components/HelloWorld.vue";
+import { setItem, getItem } from "../utils/storage";
 
 export default {
   name: "home",
   data() {
-    const websites = localStorage.getItem("websites");
     return {
-      websites: (websites && JSON.parse(websites)) || [],
+      websites: [],
       urlInput: "",
       labelInput: ""
     };
@@ -33,14 +31,18 @@ export default {
   },
   methods: {
     addWebsite() {
-      this.websites.push({ url: this.urlInput, label: this.labelInput });
-      this.storeWebsiteState()
+      this.websites.push({ url: this.urlInput });
+      this.storeWebsiteState();
       this.urlInput = "";
-      this.labelInput = "";
     },
-    storeWebsiteState(){
-        localStorage.setItem("websites", JSON.stringify(this.websites));
+    storeWebsiteState() {
+      setItem("websites", this.websites);
     }
+  },
+  created() {
+    getItem("websites", ({ websites }) => {
+      this.websites = websites || [];
+    });
   }
 };
 </script>
@@ -49,12 +51,22 @@ export default {
 .website {
   display: flex;
   align-items: center;
-  a {
-    margin-left: 0.5em;
-    text-decoration: none;
+  text-decoration: none;
+  img {
+    margin-right: 0.5em;
   }
 }
 input {
   margin-right: 1em;
+  width: 400px;
 }
+  .title {
+    display: flex;
+  }
+  form input {
+    opacity: 0;
+    &:hover, &:focus, &:active {
+      opacity: 1;
+    }
+  }
 </style>
